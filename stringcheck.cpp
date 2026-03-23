@@ -23,6 +23,7 @@ bool isPalindrome(char str[], int len) {
     return true;
 }
 
+
 int main() {
     char input[1000];
     cout << "문자열 입력: ";
