@@ -28,6 +28,7 @@ class my_list{
     bool list_empty();
     double sum_score();
     double get_score(string t_name);
+    int remove_a_node(string t_name);
 
 };
 
@@ -98,6 +99,31 @@ double my_list :: sum_score(){
          sum += p->score;
     }
     return sum;
+}
+
+int my_list::remove_a_node(string t_name){
+    node *p = head;
+    node *prev = NULL;
+    while(p != NULL){
+        if(p->name == t_name){
+            if(prev == NULL) head = p->link;
+            else prev->link = p->link;
+            if(p == tail) tail = prev;
+            delete p;
+            return 1; // 삭제 성공
+        }
+        prev = p;
+        p = p->link;
+    }
+    return 0; // 못 찾음
+}
+double my_list::get_score(string t_name){
+    node *p = head;
+    while(p != NULL){
+        if(p->name == t_name) return p->score;
+        p = p->link;
+    }
+    return -1.0; // 못 찾으면 -1 반환
 }
 
 
