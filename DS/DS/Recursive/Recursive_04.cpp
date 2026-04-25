@@ -14,4 +14,3 @@ int main() {
     cout << x << "와 " << y << "의 최대공약수: " << gcd(x, y) << endl;
     return 0;
 }
-
