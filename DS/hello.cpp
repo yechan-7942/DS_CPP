@@ -12,3 +12,4 @@ int main(){
     d = n *n +3;
     cout << "d는 " << d ;
 }
+
