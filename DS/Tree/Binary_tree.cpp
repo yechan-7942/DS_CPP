@@ -14,5 +14,19 @@ void node :: set_data(string s, double n){
     score = n;
 }
 
+class my_tree{
+    public : 
+    int node_count;
+    node *root;
+    my_tree();
+    int insert_root(node t);
+    int insert_left(string tname , node t);
+    int insert_right(string tname , node t);
 
+    double score_sum();
+    double score_average();
+    void print_data_inorder(); //inorder순서로 모든 node의 값 출력
+    void print_data_preorder();
+    void print_data_postorder();
+};
 
