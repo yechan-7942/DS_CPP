@@ -30,3 +30,14 @@ class my_tree{
     void print_data_postorder();
 };
 
+my_tree :: my_tree(){
+    node_count = 0;
+    root = NULL;
+}
+
+int my_tree :: insert_left(string tname, node t){
+   if(root == NULL){
+    return 0;
+   }
+
+}
