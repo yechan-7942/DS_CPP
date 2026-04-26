@@ -20,8 +20,8 @@ class my_tree{
     node *root;
     my_tree();
     int insert_root(node t);
-    int insert_left(string tname , node t);
-    int insert_right(string tname , node t);
+    int insert_left(node *p , string tname , node t);
+    int insert_right(node *p , string tname , node t);
 
     double score_sum();
     double score_average();
@@ -35,9 +35,26 @@ my_tree :: my_tree(){
     root = NULL;
 }
 
-int my_tree :: insert_left(string tname, node t){
-   if(root == NULL){
-    return 0;
-   }
+int my_tree::insert_left(node *p, string tname, node tnode) {
+    if (p == NULL) return 0; // 탐색 실패
 
+    if (p->name == tname) {
+        if (p->left != NULL) return -1; // 이미 왼쪽 자식이 있으면 실패
+
+        node *newNode = new node;
+        *newNode = tnode; // 값 복사
+        newNode->left = NULL;
+        newNode->right = NULL;
+        p->left = newNode;
+        node_count++;
+        return 1; // 성공
+    }
+    else {
+        // 왼쪽 서브트리 탐색
+        int result = insert_left(p->left, tname, tnode);
+        if (result != 0) return result;
+
+        // 오른쪽 서브트리 탐색
+        return insert_left(p->right, tname, tnode);
+    }
 }
