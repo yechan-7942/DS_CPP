@@ -93,4 +93,7 @@ double sum_allnodes(node *p){
     return sum_allnodes(p ->left) + sum_allnodes(p->right) + p->score;
 }
 
+void my_tree :: print_data_inorder(){
+    
+}
 
