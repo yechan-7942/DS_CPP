@@ -91,3 +91,20 @@ void inorder_print(node *p){
     inorder_print(p->right);
 }
 
+int main(){
+    my_tree thetree;
+    node tmp;
+
+    tmp.set_data("kim", 9.1);
+    thetree.insert_root(tmp);
+    tmp.set_data("Lee", 6.5);
+thetree.insert_left("Kim", tmp);
+tmp.set_data("Park", 8.3);
+thetree.insert_right("Kim", tmp);
+tmp.set_data("Choi", 7.2);
+thetree.insert_left("Lee", tmp);
+tmp.set_data("Ryu", 9.0);
+thetree.insert_right("Lee", tmp);
+tmp.set_data("Cho", 7.7);
+thetree.insert_right("Park", tmp);
+}
