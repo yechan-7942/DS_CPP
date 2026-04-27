@@ -66,3 +66,14 @@ int node_insert_left(node *p, string tname, node tnode){
         }
     }
 }
+
+double my_tree :: score_sum(){
+    return sum_allnodes(root);
+}
+
+double sum_allnodes(node *p){
+    if(p == NULL){
+        return 0;
+    }
+    return sum_allnodes(p->left) + sum_allnodes(p->right)  + p->score;
+}
