@@ -77,3 +77,17 @@ double sum_allnodes(node *p){
     }
     return sum_allnodes(p->left) + sum_allnodes(p->right)  + p->score;
 }
+
+void my_tree :: print_data_inorder(){
+    inorder_print(root);
+}
+
+void inorder_print(node *p){
+    if( p == NULL){
+        return ;
+    }
+    inorder_print(p ->left);
+    cout << p->name << " : " << p->score << endl ;
+    inorder_print(p->right);
+}
+
