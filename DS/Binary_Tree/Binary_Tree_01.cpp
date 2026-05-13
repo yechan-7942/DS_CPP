@@ -23,6 +23,7 @@ public:
     int insert_left(string tname, node tnode);
     int insert_right(string tname, node tnode);
     double score_sum();
+    void print_data_inorder();
 };
 
 my_tree::my_tree() {
@@ -41,8 +42,6 @@ int my_tree::insert_root(node t) {
     node_count++;
     return 1;
 }
-
-// ─── 앞에 선언 필요 ───
 int node_insert_left(node *p, string tname, node tnode);
 int node_insert_right(node *p, string tname, node tnode);
 double sum_allnodes(node *p);
@@ -109,6 +108,19 @@ double sum_allnodes(node *p) {
     return sum_allnodes(p->left) + sum_allnodes(p->right) + p->score;
 }
 
+
+void my_tree :: print_data_inorder(){
+    inorder_print(root);
+}
+
+void inorder_print(node *p){
+    if(p == NULL){
+        return ;
+    }
+    inorder_print(p->left);
+    cout << p->name << " : " << p->score << endl;
+    inorder_print(p->right);
+}
 int main() {
     my_tree thetree;
     node n;
@@ -131,8 +143,10 @@ int main() {
     n.set_data("Cho", 7.7);
     thetree.insert_left("Park", n);
 
-    
+
     cout << "Score Sum : " << thetree.score_sum() << "\n";
+    cout << "print inorder " << endl;
+    thetree.print_data_inorder();
 
     return 0;
 }
