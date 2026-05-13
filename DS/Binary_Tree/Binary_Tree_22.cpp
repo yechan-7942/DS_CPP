@@ -1,4 +1,5 @@
 #include <iostream>
+#include<stack>
 using namespace std;
 
 class node {
@@ -23,7 +24,7 @@ public:
     int insert_left(string tname, node tnode);
     int insert_right(string tname, node tnode);
     double score_sum();
-    void print_data_inorder();
+    void nonrecursive_inorder();
 };
 
 my_tree::my_tree() {
@@ -108,19 +109,26 @@ double sum_allnodes(node *p) {
     return sum_allnodes(p->left) + sum_allnodes(p->right) + p->score;
 }
 
-void inorder_print(node *p){
-    if(p == NULL){
-        return ;
+
+void my_tree :: nonrecursive_inorder(){
+    stack<node*> s1;
+    node *t;
+
+    t= root;
+    while(1){
+        while(t!=NULL){
+            s1.push(t);
+            t = t->left;
+        }
+        if(s1.empty()){
+            return ;
+        }
+        t = s1.top();
+        s1.pop();
+        cout << t->name << " : " << t->score <<endl;
+        t= t->right;
     }
-    inorder_print(p->left);
-    cout << p->name << " : " << p->score << endl;
-    inorder_print(p->right);
 }
-
-void my_tree :: print_data_inorder(){
-    inorder_print(root);
-}
-
 
 int main() {
     my_tree thetree;
@@ -147,7 +155,7 @@ int main() {
 
 cout << "Score Sum : " << thetree.score_sum() << "\n";
 cout << "print inorder " << endl;
-thetree.print_data_inorder();  // 그냥 호출만
+thetree.nonrecursive_inorder();
 
     return 0;
 }
