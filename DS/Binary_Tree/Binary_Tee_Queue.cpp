@@ -1,4 +1,5 @@
 #include <iostream>
+#include<queue>
 using namespace std;
 
 class node {
@@ -23,7 +24,7 @@ public:
     int insert_left(string tname, node tnode);
     int insert_right(string tname, node tnode);
     double score_sum();
-    void print_data_inorder();
+    void print_data_levelorder();
 };
 
 my_tree::my_tree() {
@@ -108,20 +109,28 @@ double sum_allnodes(node *p) {
     return sum_allnodes(p->left) + sum_allnodes(p->right) + p->score;
 }
 
+void my_tree::print_data_levelorder() {
+    if (root == NULL) return;
 
+    queue<node*> q;
+    q.push(root);
 
-void my_tree :: print_data_inorder(){
-    inorder_print(root);
-}
+    while (!q.empty()) {
+        node* current = q.front();
+        q.pop();
 
-void inorder_print(node *p){
-    if(p == NULL){
-        return ;
+        cout << current->name << " : " << current->score << endl;
+
+        if (current->left != NULL) {
+            q.push(current->left);
+        }
+        if (current->right != NULL) {
+            q.push(current->right);
+        }
     }
-    inorder_print(p->left);
-    cout << p->name << " : " << p->score << endl;
-    inorder_print(p->right);
 }
+
+
 int main() {
     my_tree thetree;
     node n;
@@ -147,7 +156,7 @@ int main() {
 
 cout << "Score Sum : " << thetree.score_sum() << "\n";
 cout << "print inorder " << endl;
-thetree.print_data_inorder();  // 그냥 호출만
+thetree.print_data_levelorder();
 
     return 0;
 }
