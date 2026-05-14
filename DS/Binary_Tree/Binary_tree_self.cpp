@@ -110,8 +110,27 @@ int my_tree::insert_right(string tname, node tnode) {
 // - node_insert_left와 동일한 구조
 // - 단, 오른쪽 자식에 삽입
 // ──────────────────────────────────────────
-int node_insert_right(node *p, string tname, node tnode) {
-    /* TODO */
+int node_insert_right(node *p, string tname, node tnode){
+    if(p == NULL){
+        return -1;
+    }
+    if(p->name == tname){
+        node *t = new node;
+        (*t) = tnode;
+        t->left =NULL;
+        t->right =NULL;
+        p->right = t;
+        return 1;
+    }
+    else{
+        int result = node_insert_right(p->left, tname, tnode);
+
+        if(result != 0){
+            return result;
+        }
+
+        return node_insert_right(p->right, tname, tnode);
+    }
 }
 
 double my_tree::score_sum() {
