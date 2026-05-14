@@ -143,7 +143,10 @@ double my_tree::score_sum() {
 // - p == NULL이면 0 반환
 // ──────────────────────────────────────────
 double sum_allnodes(node *p) {
-    /* TODO */
+    if(p==NULL){
+        return 0;
+    }
+    return sum_allnodes(p->left) + sum_allnodes(p->right) + p->score;
 }
 
 // ──────────────────────────────────────────
