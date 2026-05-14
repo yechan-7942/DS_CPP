@@ -24,7 +24,7 @@ public:
     int insert_left(string tname, node tnode);
     int insert_right(string tname, node tnode);
     double score_sum();
-    void print_data_levelorder();
+    void print_data_inorder();
 };
 
 my_tree::my_tree() {
@@ -155,8 +155,17 @@ double sum_allnodes(node *p) {
 // - root가 NULL이면 바로 return
 // - 각 노드: cout << name << " : " << score << endl
 // ──────────────────────────────────────────
-void my_tree::print_data_levelorder() {
-    /* TODO */
+void my_tree::print_data_inorder() {
+    inorder_print(root);
+}
+
+void inorder_print(node *p){
+    if(p == NULL){
+        return ;
+    }
+    inorder_print(p->left);
+    cout<< p->name << p->score << endl;
+    inorder_print(p->right);
 }
 
 int main() {
@@ -183,7 +192,7 @@ int main() {
 
     cout << "Score Sum : " << thetree.score_sum() << "\n";
     cout << "print inorder " << endl;
-    thetree.print_data_levelorder();
+    thetree.print_data_inorder();
 
     return 0;
 }
