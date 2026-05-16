@@ -90,7 +90,7 @@ public:
     int insert_right(string tname, node t) {
         int result;
         result = node_insert_right(root, tname, t);
-        if(result =1){
+        if(result ==1){
             node_count++;
         }
         return result;
@@ -101,6 +101,9 @@ public:
             return 0;
         }
         if(p->name == tname){
+            if(p->right!= NULL){
+                return -1;
+            }
         node *t = new node;
         *t = tnode;
         t->left = NULL;
@@ -120,18 +123,28 @@ public:
 
     // tname 노드 삭제
     void delete_node(string tname) {
-        // TODO
+        
     }
 
     // 모든 노드 score 합
     double score_sum() {
-        // TODO
+        return sum_allnodes(root);
+    }
+    
+    double sum_allnodes(node *p){
+        if(p== NULL){
+            return 0;
+        }
+        return sum_allnodes(p->left) + sum_allnodes(p->right) + p->score;
     }
 
     // 모든 노드 score 평균
     double score_average() {
-        // TODO
-    }
+        if(node_count == 0){
+            return 0;
+        }
+        return score_sum() / node_count;
+        }
 
     // ========================
     // 이미 구현된 함수들 (PDF 기반)
@@ -217,6 +230,9 @@ int main() {
 
     tmp.set_data("Park", 8.3);
     thetree.insert_right("Kim", tmp);
+
+
+    cout << "score : " << thetree.score_sum() << "  average : " << thetree.score_average() << endl;
 
     cout << "\nNon-recursive Inorder:\n";
     thetree.nonrecursive_inorder();
