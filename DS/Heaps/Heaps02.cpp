@@ -36,19 +36,42 @@ int  my_heap::h_size()     { return csize; }
 // ✅ insert 구현 (sift-up)
 void my_heap::insert_heap(element t) {
     int k;
-    csize++;
-    k = csize ;
+    csize ++;
+    k=csize;
 
-    while((k!=1) && (t.score > h[k/2].score)){
-        h[k] = h[k/2];//부모 노도를 내 자리(k)로 복사해서 내려옴 > 내가 올라갈 자리를 비우는 작업
-        k/=2;//나(k)를 부모 위치로 이동 > 다음 루프에서 그 위 부모랑 비교하기 위해 
+    while((k!=1) && t.score > h[k/2].score){
+        h[k] = h[k/2];
+        k/=2;
     }
-    h[k]= t;
+    h[k] = t; 
 }
 
 // ✅ delete 구현 (sift-down)
 element my_heap::delete_heap() {
-    
+    element t;//꺼낼 루트값 저장
+    element temp;//마지막 노드 저장
+
+    int parent, child;
+
+    t= h[1];
+    temp = h[csize];
+    csize -- ;
+    parent =1;
+    child =2;
+
+    while(child <= csize){
+        if((child <csize) && (h[child].score <h[child +1].score)){
+            child ++;
+        }
+        if(temp.score >= h[child].score){
+            break;
+        }
+        h[parent] = h[child];
+        parent = child;
+        child *=2;
+    }
+    h[parent] = temp;
+    return t;
 }
 
 int main() {
