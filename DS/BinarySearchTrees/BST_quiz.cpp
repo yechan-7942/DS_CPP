@@ -3,13 +3,17 @@ using namespace std;
 
 class bst_node {
 public:
-    string phone;    // key (전화번호)
+    string s_id;
     string name;
-    string birthday;
+    double score;
     bst_node* left, * right;
     bst_node() { left = NULL; right = NULL; }
-    void set_data(string p, string n, string b) {
-        phone = p; name = n; birthday = b;
+    bst_node(string s1, string s2, double n) {
+        s_id = s1; name = s2; score = n;
+        left = NULL; right = NULL;
+    }
+    void set_data(string s1, string s2, double n) {
+        s_id = s1; name = s2; score = n;
     }
 };
 
@@ -21,64 +25,102 @@ public:
     void insert_node(bst_node t);
     bst_node search(string tid);
     void show_inorder();
-    int size() { return csize; }
-    bool empty() { return root == NULL; }
 };
 
-void bst_tree :: insert_node(bst_node t){
-    bst_node *p;
-    bst_node *tmp;
+// ============================================
+// 문제 1 : insert_node 구현
+// ============================================
+void bst_tree::insert_node(bst_node t) {
 
-    tmp = new bst_node;
-    *tmp = t;
-    tmp ->left = NULL;
-    tmp ->right = NULL;
-    if(root == NULL){
-        root = tmp;
-        return ;
-    }
-    p = root;
-    while(1){
-        
-    }
+   
 }
 
-
-int main() {
-    bst_tree t1;
-    bst_node temp;
-    int choice;
-    string phone, name, birthday;
-
-    while (1) {
-        cout << "\n===== 전화번호부 메뉴 =====" << endl;
-        cout << "1. 새로운 원소 추가" << endl;
-        cout << "2. 원소 조회" << endl;
-        cout << "3. 전체 목록 보기" << endl;
-        cout << "4. 종료" << endl;
-        cout << "명령 선택 : ";
-        cin >> choice;
-
-        if (choice == 1) {
-            // ⬜ (1) 전화번호, 이름, 생일 입력받고 insert
+// ============================================
+// 문제 2 : search 구현
+// ============================================
+bst_node bst_tree::search(string tid) {
+    bst_node *p;
+     p=root;
+     if(root == NULL){
+        bst_node tmp;
+        tmp.set_data("0000000" , "None", -1);
+        cout << "the key" << tid << "does not exits\n";
+        return tmp;
+     }
+     while(1){
+        if(p->s_id == tid)
+            return (*p);
         
+        
+        if(p->s_id < tid){
+            if(p->right == NULL){
+                bst_node tmp;
+        tmp.set_data("0000000" , "None", -1);
+        cout << "the key" << tid << "does not exits\n";
+        return tmp;
+            }
+            else{
+                p = p->right;
+            }
+            
+        }
+        else{
+            if(p->left == NULL){
+                bst_node tmp;
+                tmp.set_data("0000000", "None" , -1);
+                cout << "the key : " << tid << "does not exits" << endl;
+                return tmp;
+            }
+            else{
+                p= p->left;
+            }
+        }
+     }
 
-        }
-        else if (choice == 2) {
-            // ⬜ (2) 전화번호 입력받고 search 후 결과 출력
+}
 
-        }
-        else if (choice == 3) {
-            // ⬜ (3) 전체 목록 출력
+// ============================================
+// show_inorder (완성된 코드 - 문제 아님)
+// ============================================
+void inorder_helper(bst_node* p) {
+    if (p == NULL) return;
+    inorder_helper(p->left);
+    cout << p->s_id << " : " << p->name << " : " << p->score << endl;
+    inorder_helper(p->right);
+}
+void bst_tree::show_inorder() {
+    inorder_helper(root);
+}
 
-        }
-        else if (choice == 4) {
-            // ⬜ (4) 종료 메시지 출력 후 종료
+// ============================================
+// main
+// ============================================
+int main() {
+    bst_node temp;
+    bst_tree t1;
 
-        }
-        else {
-            cout << "잘못된 입력입니다." << endl;
-        }
-    }
+    temp.set_data("21900013", "Kim", 6.5);
+    t1.insert_node(temp);
+    temp.set_data("21900136", "Lee", 8.8);
+    t1.insert_node(temp);
+    temp.set_data("21900333", "Park", 9.2);
+    t1.insert_node(temp);
+    temp.set_data("21800442", "Choi", 7.1);
+    t1.insert_node(temp);
+    temp.set_data("21900375", "Ryu", 5.4);
+    t1.insert_node(temp);
+    temp.set_data("21700248", "Cho", 6.3);
+    t1.insert_node(temp);
+
+    cout << "\n\n Node List : inorder sequence \n";
+    t1.show_inorder();
+
+    string s_key = "21800442";
+    temp = t1.search(s_key);
+    cout << "\n -- " << s_key << "'s record ---" << endl;
+    cout << " Student ID : " << temp.s_id << endl;
+    cout << " Student Name : " << temp.name << endl;
+    cout << " Score : " << temp.score << endl;
+
     return 0;
 }
