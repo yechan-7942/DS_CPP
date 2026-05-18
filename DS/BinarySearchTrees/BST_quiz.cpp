@@ -31,8 +31,41 @@ public:
 // 문제 1 : insert_node 구현
 // ============================================
 void bst_tree::insert_node(bst_node t) {
+    bst_node *p;
+    bst_node *tmp = new bst_node;
+    p = root;
+    *tmp  = t;
+    tmp ->left = NULL;
+    tmp ->right = NULL;
 
-   
+
+    if(p ==NULL){
+        root = tmp;
+        return ;
+    }
+   while(1){
+    if(p->s_id == t.s_id){
+        cout << "Inseration fail" << t.s_id << endl;
+        return ;
+    }
+    if(p->s_id <t.s_id){
+        if(p->right == NULL){
+            p->right = tmp;
+            return ;
+        }
+        else {
+            p = p->right;
+        }
+    }
+    else{
+        if(p->left == NULL){
+            p->left = tmp;
+            return ;
+        }
+        else
+        p=p->left;
+    }
+   }
 }
 
 // ============================================
