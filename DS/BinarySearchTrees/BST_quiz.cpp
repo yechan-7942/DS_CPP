@@ -81,8 +81,9 @@ bst_node bst_tree::search(string tid) {
         return tmp;
      }
      while(1){
-        if(p->s_id == tid)
+        if(p->s_id == tid){
             return (*p);
+        }
         
         
         if(p->s_id < tid){
