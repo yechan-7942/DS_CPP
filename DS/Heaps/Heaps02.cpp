@@ -46,7 +46,7 @@ void my_heap::insert_heap(element t) {
     h[k] = t;
 }
 
-// ✅ delete 구현 (sift-down)
+/*
 element my_heap::delete_heap() {
     element t;//꺼낼 루트값 저장
     element temp;//마지막 노드 저장
@@ -73,7 +73,33 @@ element my_heap::delete_heap() {
     h[parent] = temp;
     return t;
 }
+    */
 
+    element my_heap::delete_heap(){
+
+        element t;
+        element tmp;
+        int parent, child;
+        t= h[1];
+        tmp = h[csize];
+        csize --;
+        parent =1;
+        child =2;
+        while(child <= csize){
+            if((child<csize) && h[child].score < h[child +1].score){
+                child++;
+            }
+            if(tmp.score >= h[child].score){
+                break;
+            }
+            h[parent] = h[child];
+            parent = child;
+            child = child*2;
+        }
+        h[parent] = tmp;
+        return t;
+
+    }
 int main() {
     my_heap h1;
     element temp;
