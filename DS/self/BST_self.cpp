@@ -81,6 +81,32 @@ bst_node bst_tree::search(string tid) {
         cout << "The Key " << tid << "does not exites" << endl;
         return tmp;
     }
+    while(1){
+        if(p->s_id ==tid){
+            return *p;
+        }
+        if(p->s_id <tid){
+            if(p->right == NULL){
+                bst_node tmp;
+                tmp.set_data("000000","None", -1);
+                return tmp;
+            }
+            else{
+                p= p->right;
+            }
+        }
+
+        else{
+            if(p->left == NULL){
+                bst_node tmp;
+                tmp.set_data("000000", "None" ,-1);
+                return tmp;
+            }
+            else{
+                p= p->left;
+            }
+        }
+    }
 }
 
 // ============================================
