@@ -33,16 +33,16 @@ public:
 void bst_tree::insert_node(bst_node t) {
     bst_node *p;
     bst_node *tmp = new bst_node;
-    p = root;
     *tmp  = t;
     tmp ->left = NULL;
     tmp ->right = NULL;
 
-
-    if(p ==NULL){
+    if(root ==NULL){
         root = tmp;
         return ;
     }
+        p = root;
+
    while(1){
     if(p->s_id == t.s_id){
         cout << "Inseration fail" << t.s_id << endl;
@@ -84,7 +84,6 @@ bst_node bst_tree::search(string tid) {
         if(p->s_id == tid){
             return (*p);
         }
-        
         
         if(p->s_id < tid){
             if(p->right == NULL){
