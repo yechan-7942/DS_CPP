@@ -37,13 +37,13 @@ int  my_heap::h_size()     { return csize; }
 void my_heap::insert_heap(element t) {
     int k;
     csize ++;
-    k=csize;
+    k = csize;
 
-    while((k!=1) && t.score > h[k/2].score){
+    while(k >1 && h[k/2].score < t.score ){
         h[k] = h[k/2];
-        k/=2;
+        k = k/2;
     }
-    h[k] = t; 
+    h[k] = t;
 }
 
 // ✅ delete 구현 (sift-down)
