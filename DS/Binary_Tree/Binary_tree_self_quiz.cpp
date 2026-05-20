@@ -227,12 +227,16 @@ int count_above_score(double threshold) {
 }
 
 int count_above(node *p, double threshold) {
-    if (p == NULL) return 0;
-    int cnt = (p->score >= threshold) ? 1 : 0;
-    return cnt + count_above(p->left, threshold) + count_above(p->right, threshold);
+    if(p==NULL){
+        return 0;
+    }
+    int count =0;
+    if(p->score >= threshold){
+        count ++;
+    }
+    return count + (p->right,threshold) + count_above(p->left, threshold);
 }
 
-// 특정 점수 이상인 노드들의 평균
 double average_above_score(double threshold) {
     int cnt = count_above_score(threshold);
     if (cnt == 0) return 0;
@@ -241,7 +245,10 @@ double average_above_score(double threshold) {
 
 double sum_above(node *p, double threshold) {
     if (p == NULL) return 0;
-    double s = (p->score >= threshold) ? p->score : 0;
+    double s = 0;
+    if (p->score >= threshold) {
+        s = p->score;
+    }
     return s + sum_above(p->left, threshold) + sum_above(p->right, threshold);
 }
 };
