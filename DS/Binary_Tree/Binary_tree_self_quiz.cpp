@@ -60,6 +60,7 @@ public:
        
     }
 
+    
     int insert_left_node(node *p, string tname, node tnode){
         if(p == NULL){
             return 0;
@@ -253,26 +254,6 @@ double sum_above(node *p, double threshold) {
 }
 };
 
-/*
-queue<node *> q;
-if(root == NULL){
-return ;
-}
-q.push(root);
-if(q.emty()){
-return ;
-}
-node *t = q.front();
-q.pop();
-cout << t->name << "  :  "  << t->score << endl;
-if(t->left != NULL){
-q.push(t->left)
-}
-if(t->right == NULl){
-q.push(t->right);
-}
-}
-*/
 
 // ========================
 // Tree Copy
@@ -291,14 +272,6 @@ void copy_tree(my_tree &t1, my_tree t2) {
     t1.root = make_copy(t2.root);
 }
 
-// ========================
-// Equality Test
-// ========================
-
-
-// ========================
-// main
-// ========================
 int main() {
     my_tree thetree;
     node tmp;
