@@ -23,7 +23,7 @@ struct node {
 // ========================
 class my_tree {
 public:
-    int node_count;
+    int node_count=0;
     node *root;
 
     my_tree() {
@@ -37,7 +37,7 @@ public:
 
     // root에 노드 삽입
     int insert_root(node t) {
-        if(root == NULL){
+        if(root !=NULL){
             return 0;
         }
         node *p = new node;
@@ -154,13 +154,13 @@ public:
 
     // 모든 노드 score 합
     double score_sum() {
-       return = sum_allnodes(root);
+       return  sum_allnodes(root);
     }
 
    
     
     double sum_allnodes(node *p){
-         if(root == NULL){
+         if(p== NULL){
             return 0;
         }
         return sum_allnodes(p->right) + sum_allnodes(p->left) + p->score;
@@ -168,7 +168,7 @@ public:
 
     // 모든 노드 score 평균
     double score_average() {
-        score_sum() / node_count ;
+        return score_sum() / node_count ;
         }
 
     // ========================
@@ -226,13 +226,7 @@ void copy_tree(my_tree &t1, my_tree t2) {
 // ========================
 // Equality Test
 // ========================
-bool equal_test(node *p1, node *p2) {
-   
-}
 
-bool equal_tree(my_tree t1, my_tree t2) {
-   
-}
 
 // ========================
 // main
