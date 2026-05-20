@@ -89,35 +89,86 @@ public:
 
     // tname 노드의 오른쪽에 삽입
     int insert_right(string tname, node tnode) {
+        int result; 
+        result = insert_right_node(root , tname, tnode);
+        if(result == 1){
+            node_count ++;
+        }
+        return result;
         
     }
 
     int insert_right_node(node *p, string tname, node tnode){
-       
+       if(p==NULL){
+        return 0;
+       }
+       if(p->name == tname){
+        if(p->right != NULL){
+            return -1;
+        }
+        node *t = new node;
+        (*t) = tnode;
+        t->left = NULL;
+        t->right = NULL;
+        p->right = t;
+        return 1;
+       }
+       else{
+        int result;
+        result = insert_right_node(p->left, tname, tnode);
+        if(result != 0){
+            return result;
+        }
+        return insert_right_node(p->right, tname, tnode);
+       }
     }
     
     
 
     // tname 노드 삭제
-    void delete_node(string tname) {
-        
+      int delete_node(node* p, string tname) {
+    if (p == NULL) return 0;
+
+    if (p->left && p->left->name == tname) {
+        if (p->left->left == NULL && p->left->right == NULL) {
+            delete p->left;
+            p->left = NULL;
+            return 1;
+        }
+        return -1; // 자식 있으면 아직 처리 안 함
+    }
+    if (p->right && p->right->name == tname) {
+        if (p->right->left == NULL && p->right->right == NULL) {
+            delete p->right;
+            p->right = NULL;
+            return 1;
+        }
+        return -1;
     }
 
+    int result = delete_node(p->left, tname);
+    if (result != 0) return result;
+    return delete_node(p->right, tname);
+}
+  
+
     // 모든 노드 score 합
-    double score_sum(node *p) {
-       if(p == NULL){
-        return 0;
-       }
-       return (p->score) + score_sum(p->left) + score_sum(p->right);
+    double score_sum() {
+       return = sum_allnodes(root);
     }
+
+   
     
     double sum_allnodes(node *p){
-        
+         if(root == NULL){
+            return 0;
+        }
+        return sum_allnodes(p->right) + sum_allnodes(p->left) + p->score;
     }
 
     // 모든 노드 score 평균
     double score_average() {
-       
+        score_sum() / node_count ;
         }
 
     // ========================
