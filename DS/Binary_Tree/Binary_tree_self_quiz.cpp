@@ -191,6 +191,8 @@ public:
         }
     }
 
+    
+
     // level-order traversal
     void print_data_levelorder() {
         queue<node*> q;
@@ -204,7 +206,66 @@ public:
             if (t->right != NULL) q.push(t->right);
         }
     }
+
+    // 특정 점수 이상인 노드 출력
+void print_above_score(double threshold) {
+    search_above(root, threshold);
+}
+
+void search_above(node *p, double threshold) {
+    if (p == NULL) return;
+    if (p->score >= threshold) {
+        cout << p->name << " : " << p->score << endl;
+    }
+    search_above(p->left, threshold);
+    search_above(p->right, threshold);
+}
+
+// 특정 점수 이상인 노드 개수
+int count_above_score(double threshold) {
+    return count_above(root, threshold);
+}
+
+int count_above(node *p, double threshold) {
+    if (p == NULL) return 0;
+    int cnt = (p->score >= threshold) ? 1 : 0;
+    return cnt + count_above(p->left, threshold) + count_above(p->right, threshold);
+}
+
+// 특정 점수 이상인 노드들의 평균
+double average_above_score(double threshold) {
+    int cnt = count_above_score(threshold);
+    if (cnt == 0) return 0;
+    return sum_above(root, threshold) / cnt;
+}
+
+double sum_above(node *p, double threshold) {
+    if (p == NULL) return 0;
+    double s = (p->score >= threshold) ? p->score : 0;
+    return s + sum_above(p->left, threshold) + sum_above(p->right, threshold);
+}
 };
+
+/*
+queue<node *> q;
+if(root == NULL){
+return ;
+}
+q.push(root);
+if(q.emty()){
+return ;
+}
+node *t = q.front();
+q.pop();
+cout << t->name << "  :  "  << t->score << endl;
+if(t->left != NULL){
+q.push(t->left)
+}
+if(t->right == NULl){
+q.push(t->right);
+}
+}
+*/
 
 // ========================
 // Tree Copy
@@ -236,13 +297,13 @@ int main() {
     node tmp;
 
     // 트리 구성 테스트
-    tmp.set_data("Kim", 8.1);
+    tmp.set_data("Kim", 81);
     thetree.insert_root(tmp);
 
-    tmp.set_data("Lee", 6.5);
+    tmp.set_data("Lee", 65);
     thetree.insert_left("Kim", tmp);
 
-    tmp.set_data("Park", 8.3);
+    tmp.set_data("Park", 83);
     thetree.insert_right("Kim", tmp);
 
 
@@ -253,6 +314,12 @@ int main() {
 
     cout << "\nLevel-Order:\n";
     thetree.print_data_levelorder();
+
+    cout << "80점 이상:\n";
+thetree.print_above_score(80.0);
+
+cout << "80점 이상 인원수: " << thetree.count_above_score(80.0) << endl;
+cout << "80점 이상 평균: " << thetree.average_above_score(80.0) << endl;
 
     return 0;
 }
