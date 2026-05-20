@@ -29,7 +29,10 @@ public:
 
 my_heap::my_heap() { csize = 0; }
 
-bool my_heap::heap_empty() { return (csize == 0); }
+bool my_heap::heap_empty()
+{
+    return (csize ==0);
+}
 bool my_heap::heap_full()  { return (csize >= HSIZE - 1); }
 int  my_heap::h_size()     { return csize; }
 
@@ -120,3 +123,17 @@ int main() {
 
     return 0;
 }
+
+/*
+void my_heap :: insert_heap(element t){
+int k;
+csize ++;
+ck = csize;
+
+while(k >1  && h[k].score < t.score){
+h[k] = h[k/2];
+k= k/2;
+}
+h[k] = t;
+}
+*/
