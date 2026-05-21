@@ -141,12 +141,12 @@ public:
     }
     
     double sum_allnodes(node *p){
-        
+        return score_sum(p);
     }
 
     // 모든 노드 score 평균
     double score_average() {
-       
+       return sum_allnodes(root)/node_count;
         }
 
     // ========================

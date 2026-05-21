@@ -40,53 +40,49 @@ int  my_heap::h_size()     { return csize; }
 // 끝에 추가 후 sift-up
 void my_heap::insert_heap(element t){
     int k;
-    csize++;
+    csize ++;
     k= csize;
-    while((k!= 1) && (t.score > h[k/2].score)){
+    while((k!=1) && (h[k/2].score <t.score)){
         h[k] = h[k/2];
-        k = k/2;
+        k= k/2;
     }
     h[k] =t;
 }
 
 // 루트 꺼내고 마지막 노드 sift-down
 element my_heap::delete_heap() {
-   element t;
-   element tmp;
-   int parent, child;
-
-   t= h[1];
-   tmp = h[csize];
-   csize --;
-
-   parent =1;
-   child = 2;
-   while(child <= csize){
-    if((child <csize) && (h[child].score < h[child +1].score)){
-        child ++;//right child 선택
+    element p;
+    element tmp;
+    int parent ,child;
+    p = h[1];
+    tmp = h[csize];
+    csize --;
+    parent =1;
+    child =2;
+    while(child <=csize){
+        if((child <csize)&& (h[child].score < h[child +1].score)){
+            child ++;
+        }
+        if(h[child].score <= tmp.score){
+            break;
+        }
+        h[parent] = h[child];
+        parent = child;
+        child = child*2;
     }
-    if(tmp.score >= h[child].score){
-        break;
-    }
-    h[parent] = h[child];
-    parent = child;
-    child = child *2;
-
-   }
-   h[parent] = tmp;
-   return t;
+    h[parent] = tmp;
+    return p;
 }
 
 
 
 // 전체 score 합산
 double my_heap::sum_heap() {
-    double sum=0;
-    for(int i=1;i<=csize; i++){
+    double sum =0;
+    for(int i=1; i<=csize ; i++){
         sum += h[i].score;
-    } 
+    }
     return sum;
-
 }
 
 // 전체 score 평균
@@ -96,14 +92,14 @@ double my_heap::avg_heap() {
 
 // 최댓값 반환 (Max-heap에서 루트)
 element my_heap::max_heap() {
-        return h[1];
-
+    return h[1];
 }
 
 // 최솟값 반환 (배열 순회)
 element my_heap::min_heap() {
-    element min = h[1];
-    for(int i=2; i <=csize ; i++){
+    element min;
+    min = h[1];
+    for(int i=2; i<=csize; i++){
         if(h[i].score < min.score){
             min = h[i];
         }
@@ -113,8 +109,8 @@ element my_heap::min_heap() {
 
 // 전체 원소 출력
 void my_heap::print_heap() {
-    for(int i =1; i <=csize; i++){
-        cout << h[i].score << " " << h[i].name << endl;
+    for(int i= 1; i<csize; i++){
+        cout << h[i].name << " :" << h[i].score << endl;
     }
 }
 
