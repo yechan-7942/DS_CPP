@@ -81,7 +81,24 @@ int my_tree::insert_right(string tname, node tnode) {
     return result;
 }
 
-
+int node_insert_right(node *p, string tname, node tnode) {
+    if (p == NULL) return 0;
+    if (p->name == tname) {
+        if (p->right != NULL) return -1;
+        node *t = new node;
+        (*t) = tnode;
+        t->left = NULL;
+        t->right = NULL;
+        p->right = t;
+        return 1;
+    }
+    else {
+        int result;
+        result = node_insert_right(p->left, tname, tnode);  // 왼쪽부터
+        if (result != 0) return result;
+        return node_insert_right(p->right, tname, tnode);
+    }
+}
 
 double my_tree::score_sum() {
     return sum_allnodes(root);
