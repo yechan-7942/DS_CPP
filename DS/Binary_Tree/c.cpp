@@ -159,5 +159,7 @@ cout << "print inorder " << endl;
 thetree.print_data_levelorder();
 
 cout << "왜 안되노" << endl;
+cout<< "왜 아직도 안되노" << endl;
+
     return 0;
 }
