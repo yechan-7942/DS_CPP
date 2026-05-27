@@ -158,5 +158,6 @@ cout << "Score Sum : " << thetree.score_sum() << "\n";
 cout << "print inorder " << endl;
 thetree.print_data_levelorder();
 
+cout << "왜 안되노" << endl;
     return 0;
 }
