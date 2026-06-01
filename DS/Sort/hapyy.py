@@ -22,3 +22,5 @@ while "".join(current) != target:
 
 print("\r" + target)
 print("\n접속 완료 😎")
+
+print("dho안돼")
