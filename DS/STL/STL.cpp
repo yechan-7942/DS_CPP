@@ -32,6 +32,18 @@ void quicksort(int *list, int left, int right){
 
 
 int main(){
+    int list[] = {5, 3, 8, 1, 9, 2, 7, 4, 6};
+    int size = sizeof(list) / sizeof(list[0]);
+
+    cout << "Before: ";
+    for(int i = 0; i < size; i++) cout << list[i] << " ";
+    cout << endl;
+
+    quicksort(list, 0, size - 1);
+
+    cout << "After:  ";
+    for(int i = 0; i < size; i++) cout << list[i] << " ";
+    cout << endl;
 
     return 0;
 }
